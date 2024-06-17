@@ -1,0 +1,41 @@
+<h1>生徒新規登録</h1>
+
+<%= form_with( model: @student) do |f| %>
+    <% if @student.errors.any? %>
+        <div>
+            <h2><%= @student.errors.count %> 個のエラーがあります。</h2>
+            <ul>
+                <% @student.errors.full_messages.each do|message|%>
+                    <li><%= message %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+
+    <div>
+        <%= f.label :student_no, "学籍番号" %><br>
+        <%= f.text_field :student_no, size: 30 %>
+    </div>
+
+    <div>
+        <%= f.label :name, "名前" %><br>
+        <%= f.text_field :name, size: 30 %>
+    </div>
+
+    
+    <div>
+        <br><%= f.collection_select :club_id, Club.all, :id, :name, include_blank: "選択して下さい" %>
+    </div>
+
+    <div>
+        <%= f.submit "登録" %><br>
+    </div>
+
+
+<% end %>
+
+
+
+<div style="text-align:center">
+    <%= link_to '一覧画面へ', students_path, class: "btn btn-primary" %>
+</div>
